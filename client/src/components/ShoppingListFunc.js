@@ -1,12 +1,15 @@
 import { Input, Button } from "@material-ui/core"
 import React, { useState, useEffect } from "react"
+import axios from "axios"
 
 const ShoppingListFunc = (props) => {
     const [nombre, setNombre] = useState("Mauro")
     const [apellido, setApellido] = useState("Rodríguez")
     const onSubmit = (event) => {
         event.preventDefault()
-        alert(`Enviado ${nombre} ${apellido}`)
+        axios.post("http://localhost:8080/api",{ nombre, apellido }).then(resp => {
+            alert(resp.data.status);
+        })
     }
 
     useEffect(() => {
